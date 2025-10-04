@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portofolio Saya</title>
+    <title>My Portofolio</title>
     <link rel="icon" type="image/png" href="images/tab.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
@@ -123,9 +123,6 @@
 </head>
 
 <body class="bg-gray-900 text-gray-100">
-    <div id="preloader" class="fixed inset-0 bg-gray-900 flex items-center justify-center z-50">
-        <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-yellow-400"></div>
-    </div>
     <header class="bg-gradient-to-tr from-gray-900 via-gray-800 to-gray-900 fixed w-full z-20 shadow-2xl">
         <div class="container mx-auto flex justify-between items-center px-6 py-4">
             <h1 class="text-yellow-400 text-2xl font-bold">Portofolio</h1>
@@ -676,9 +673,6 @@
             duration: 1000,
             once: true,
         });
-        window.addEventListener("load", () => {
-            document.getElementById("preloader").style.display = "none";
-        });
         const menuBtn = document.getElementById("menu-btn");
         const menu = document.getElementById("menu");
         menuBtn.addEventListener("click", () => {
@@ -879,6 +873,12 @@
                     e.stopPropagation();
                     e.preventDefault();
                 });
+            }
+        });
+    </script>
+</body>
+
+</html>
             }
         });
     </script>
