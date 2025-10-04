@@ -1,84 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Certificate</title>
     <link rel="icon" type="image/png" href="images/tab.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      html {
-        scroll-behavior: smooth;
-      }
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
-  </head>
+</head>
 
-  <body class="bg-gray-900 text-gray-100 min-h-screen">
-    <header
-      class="bg-gradient-to-tr from-gray-900 via-gray-800 to-gray-900 w-full shadow-2xl"
-    >
-      <div
-        class="container mx-auto flex justify-between items-center px-6 py-4"
-      >
-        <h1 class="text-yellow-400 text-2xl font-bold">Certificate</h1>
-        <nav>
-          <a
-            href="index.html"
-            class="hover:text-yellow-400 font-semibold transition duration-200"
-            >Home</a
-          >
-        </nav>
-      </div>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+    <header class="bg-gradient-to-tr from-gray-900 via-gray-800 to-gray-900 w-full shadow-2xl">
+        <div class="container mx-auto flex justify-between items-center px-6 py-4">
+            <h1 class="text-yellow-400 text-2xl font-bold">Certificate</h1>
+            <nav>
+                <a href="index.html" class="hover:text-yellow-400 font-semibold transition duration-200">Home</a>
+            </nav>
+        </div>
     </header>
     <main class="container mx-auto px-4 py-10">
-      <h2 class="text-3xl font-bold text-yellow-400 mb-8 text-center">
-        Certificate List
-      </h2>
-      <div
-        id="sertifikat-grid"
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
-      >
-        <!-- Sertifikat akan ditampilkan di sini -->
-      </div>
+        <h2 class="text-3xl font-bold text-yellow-400 mb-8 text-center">
+            Certificate List
+        </h2>
+        <div id="sertifikat-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <!-- Sertifikat akan ditampilkan di sini -->
+        </div>
     </main>
     <!-- Modal -->
-    <div
-      id="modal"
-      class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden"
-    >
-      <div
-        class="relative bg-gray-900 rounded-lg shadow-lg p-4 max-w-2xl w-full"
-      >
-        <button
-          id="close-modal"
-          class="absolute top-2 right-4 text-3xl text-yellow-400 hover:text-white"
-        >
-          &times;
-        </button>
-        <div id="modal-content">
-          <!-- Konten sertifikat akan ditampilkan di sini -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+        <div class="relative bg-gray-900 rounded-lg shadow-lg p-4 max-w-2xl w-full">
+            <button id="close-modal" class="absolute top-2 right-4 text-3xl text-yellow-400 hover:text-white">
+                &times;
+            </button>
+            <div id="modal-content">
+                <!-- Konten sertifikat akan ditampilkan di sini -->
+            </div>
         </div>
-      </div>
     </div>
     <footer class="bg-gray-900 text-center py-4 text-gray-400 mt-10">
-      &copy; Alby Nizam. All rights reserved.
+        &copy; Alby Nizam. All rights reserved.
     </footer>
     <script>
-      // Sertifikat array, hanya file gambar jpg
-      const sertifikatList = [
-        "FigmaComuniti.jpg",
-        "Prototype.png",
-        "Front-end.jpg",
-        "Back-End.jpg",
-        "Sanber.png",
-        // Tambahkan sertifikat lain sesuai nama file di folder sertifikat
-      ];
-      const grid = document.getElementById("sertifikat-grid");
-      sertifikatList.forEach((src, i) => {
-        const card = document.createElement("div");
-        card.className =
-          "bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transition-transform duration-200 cursor-pointer flex flex-col items-center";
-        card.innerHTML = `
+        // Sertifikat array, hanya file gambar jpg
+        const sertifikatList = [
+            "FigmaComuniti.jpg",
+            "Prototype.png",
+            "Front-end.jpg",
+            "Back-End.jpg",
+            "Sanber.png",
+            // Tambahkan sertifikat lain sesuai nama file di folder sertifikat
+        ];
+        const grid = document.getElementById("sertifikat-grid");
+        sertifikatList.forEach((src, i) => {
+            const card = document.createElement("div");
+            card.className =
+                "bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transition-transform duration-200 cursor-pointer flex flex-col items-center";
+            card.innerHTML = `
           <img src="sertifikat/${src}" alt="Sertifikat ${i + 1}" 
             class="w-full h-56 object-cover rounded-t-lg bg-white"
             onerror="this.onerror=null;this.src='images/no-image.png';" />
@@ -88,43 +70,44 @@
             }</span>
           </div>
         `;
-        card.onclick = () => showModal(src);
-        grid.appendChild(card);
-      });
-      // Modal logic
-      const modal = document.getElementById("modal");
-      const modalContent = document.getElementById("modal-content");
-      document.getElementById("close-modal").onclick = () =>
-        modal.classList.add("hidden");
+            card.onclick = () => showModal(src);
+            grid.appendChild(card);
+        });
+        // Modal logic
+        const modal = document.getElementById("modal");
+        const modalContent = document.getElementById("modal-content");
+        document.getElementById("close-modal").onclick = () =>
+            modal.classList.add("hidden");
 
-      function showModal(src) {
-        // Create image element to check orientation
-        const img = new Image();
-        img.src = `sertifikat/${src}`;
-        img.onload = function () {
-          let style = "";
-          if (img.naturalWidth > img.naturalHeight) {
-            // Landscape
-            style = "w-full h-auto max-h-[80vh] rounded-lg mx-auto";
-          } else {
-            // Portrait
-            style = "h-[80vh] w-auto max-w-full rounded-lg mx-auto";
-          }
-          modalContent.innerHTML = `
+        function showModal(src) {
+            // Create image element to check orientation
+            const img = new Image();
+            img.src = `sertifikat/${src}`;
+            img.onload = function() {
+                let style = "";
+                if (img.naturalWidth > img.naturalHeight) {
+                    // Landscape
+                    style = "w-full h-auto max-h-[80vh] rounded-lg mx-auto";
+                } else {
+                    // Portrait
+                    style = "h-[80vh] w-auto max-w-full rounded-lg mx-auto";
+                }
+                modalContent.innerHTML = `
             <img src="sertifikat/${src}" alt="Sertifikat" class="${style}" />
           `;
-          modal.classList.remove("hidden");
-        };
-        img.onerror = function () {
-          modalContent.innerHTML = `
+                modal.classList.remove("hidden");
+            };
+            img.onerror = function() {
+                modalContent.innerHTML = `
             <img src="images/no-image.png" alt="No Image" class="w-full h-auto rounded-lg" />
           `;
-          modal.classList.remove("hidden");
+                modal.classList.remove("hidden");
+            };
+        }
+        modal.onclick = (e) => {
+            if (e.target === modal) modal.classList.add("hidden");
         };
-      }
-      modal.onclick = (e) => {
-        if (e.target === modal) modal.classList.add("hidden");
-      };
     </script>
-  </body>
+</body>
+
 </html>
