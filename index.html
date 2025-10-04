@@ -437,7 +437,7 @@
             <div class="grid md:grid-cols-3 gap-6" id="project-list">
                 <button type="button"
                     class="project-card block bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl"
-                    data-aos="zoom-in" data-video="https://www.youtube.com/embed/oHg5SJYRHA0" data-category="web"
+                    data-aos="zoom-in" data-video="https://youtu.be/1VGAYgDbMLk" data-category="web"
                     data-language="PHP, JavaScript, Tailwind CSS">
                     <div class="relative overflow-hidden">
                         <img src="images/project2.jpg" alt="Project 2"
@@ -576,9 +576,8 @@
                 </button>
                 <!-- Project Movaka Apps -->
                 <button type="button"
-                    class="project-card movaka-card block bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl"
-                    data-aos="zoom-in" data-aos-delay="200" data-video="" data-category="mobile"
-                    data-language="Dart, Flutter">
+                    class=" movaka-card block bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+                    data-category="mobile" data-language="Dart, Flutter">
                     <div class="relative overflow-hidden">
                         <img src="images/movaka.png" alt="Project 3"
                             class="w-full h-48 object-cover transform transition duration-500 hover:scale-110" />
@@ -718,10 +717,12 @@
                 let videoUrl = card.getAttribute("data-video");
                 videoUrl = getEmbedUrl(videoUrl);
                 projectVideoContainer.innerHTML = "";
+                // Pastikan iframe selalu digunakan di modal, baik mobile maupun desktop
                 const iframe = document.createElement("iframe");
                 iframe.src = videoUrl;
                 iframe.width = "100%";
-                iframe.height = "360";
+                // Ubah tinggi iframe agar lebih cocok untuk mobile
+                iframe.height = window.innerWidth < 640 ? "220" : "360";
                 iframe.frameBorder = "0";
                 iframe.allow =
                     "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
@@ -877,4 +878,5 @@
         });
     </script>
 </body>
+
 </html>
