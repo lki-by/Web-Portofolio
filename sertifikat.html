@@ -83,7 +83,9 @@
             class="w-full h-56 object-cover rounded-t-lg bg-white"
             onerror="this.onerror=null;this.src='images/no-image.png';" />
           <div class="p-4 text-center">
-            <span class="text-yellow-400 font-semibold">Sertifikat ${i + 1}</span>
+            <span class="text-yellow-400 font-semibold">Sertifikat ${
+              i + 1
+            }</span>
           </div>
         `;
         card.onclick = () => showModal(src);
@@ -96,20 +98,29 @@
         modal.classList.add("hidden");
 
       function showModal(src) {
-        modalContent.innerHTML = `
-          <img src="sertifikat/${src}" alt="Sertifikat" class="w-full h-auto rounded-lg" />
-        `;
-        modal.classList.remove("hidden");
-      }
-      modal.onclick = (e) => {
-        if (e.target === modal) modal.classList.add("hidden");
-      };
-    </script>
-  </body>
-</html>
+        // Create image element to check orientation
+        const img = new Image();
+        img.src = `sertifikat/${src}`;
+        img.onload = function () {
+          let style = "";
+          if (img.naturalWidth > img.naturalHeight) {
+            // Landscape
+            style = "w-full h-auto max-h-[80vh] rounded-lg mx-auto";
+          } else {
+            // Portrait
+            style = "h-[80vh] w-auto max-w-full rounded-lg mx-auto";
+          }
+          modalContent.innerHTML = `
+            <img src="sertifikat/${src}" alt="Sertifikat" class="${style}" />
           `;
-        }
-        modal.classList.remove("hidden");
+          modal.classList.remove("hidden");
+        };
+        img.onerror = function () {
+          modalContent.innerHTML = `
+            <img src="images/no-image.png" alt="No Image" class="w-full h-auto rounded-lg" />
+          `;
+          modal.classList.remove("hidden");
+        };
       }
       modal.onclick = (e) => {
         if (e.target === modal) modal.classList.add("hidden");
